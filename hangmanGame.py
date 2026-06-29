@@ -46,17 +46,20 @@ stages = [
  ===""",
     ]
 chosen_word=random.choice(words)
-print(chosen_word)
 display=[]
 lives=5
 game_over=False
+guessed_letters=[]
 for i in range(len(chosen_word)):
     display+='_'
 print(display)
-
 while not game_over:
-    print(stages[lives]) 
+    print(stages[lives])
     guessed_letter=input("guess a letter: ").lower()
+    if guessed_letter in guessed_letters:
+        print("you already guessed that letter!")
+        continue
+    guessed_letters.append(guessed_letter)
     for position in range(len(chosen_word)):
         letter=chosen_word[position]
         if letter==guessed_letter:
@@ -66,11 +69,10 @@ while not game_over:
         lives-=1
         if lives==0:
             game_over=True
-            print(stages[0]) 
+            print(stages[0])
             print("you LOSE!!!")
-            print("the word is '",chosen_word,"'") 
-             
+            print("the word is '",chosen_word,"'")
+
     if '_' not in display:
         game_over=True
         print("you WIN!!!")
-       
